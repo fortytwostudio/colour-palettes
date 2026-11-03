@@ -1,0 +1,84 @@
+{% import '_includes/forms.twig' as forms %}
+
+{% set paletteId = 'palette' | namespaceInputId %}
+{% set previewId = 'palette-preview' | namespaceInputId %}
+
+{{ forms.selectField({
+    label: 'Palette',
+    instructions: 'Choose a palette defined in config/colour-palettes.php.',
+    id: 'palette',
+    name: 'palette',
+    value: field.palette,
+    options: options
+}) }}
+
+<div id="palette-preview">
+    {% for handle, palette in palettes %}
+        <div
+            data-palette="{{ handle }}"
+            {% if field.palette != handle %}hidden{% endif %}
+        >
+            <div class="colour-palettes-preview">
+                {% for option in palette.options %}
+                    {% set isDefault = option.default ?? false %}
+                    {% set description = option.label %}
+
+                    <span
+                        class="colour-palettes-preview__swatch{{ isDefault ? ' colour-palettes-preview__swatch--default' : '' }}"
+                        title="{{ description }}"
+                        role="img"
+                        aria-label="{{ description }}"
+                        style="background: {{ option.color }};"
+                    ></span>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% css %}
+.colour-palettes-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.colour-palettes-preview__swatch {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    border: 1px solid rgba(127, 127, 127, 0.4);
+    outline: 2px solid transparent;
+    outline-offset: 1px;
+}
+
+.colour-palettes-preview__swatch--default {
+    outline-color: #2563eb;
+}
+{% endcss %}
+
+{% js %}
+(() => {
+    const select = document.getElementById(
+        {{ paletteId | json_encode | raw }}
+    );
+
+    const preview = document.getElementById(
+        {{ previewId | json_encode | raw }}
+    );
+
+    if (!select || !preview) {
+        return;
+    }
+
+    const updatePreview = () => {
+        preview.querySelectorAll('[data-palette]').forEach((palette) => {
+            palette.hidden = palette.dataset.palette !== select.value;
+        });
+    };
+
+    select.addEventListener('change', updatePreview);
+    updatePreview();
+})();
+{% endjs %}

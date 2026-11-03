@@ -1,0 +1,37 @@
+{
+	"name": "fortytwo-studio/colour-palettes",
+	"description": "Colour palettes with solid colours, gradients and custom attributes.",
+	"type": "craft-plugin",
+	"version": "1.0.0",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "FortyTwo Studio",
+			"homepage": "https://fortytwo.studio"
+		}
+	],
+	"require": {
+		"php": "^8.3",
+		"craftcms/cms": "^5.0.0"
+	},
+	"autoload": {
+		"psr-4": {
+			"fortytwostudio\\colourpalettes\\": "src/"
+		}
+	},
+	"extra": {
+		"name": "Color Palettes",
+		"handle": "colour-palettes",
+		"developer": "FortyTwo Studio",
+		"developerUrl": "https://fortytwo.studio",
+		"documentationUrl": "https://github.com/fortytwostudio/colour-palettes/blob/main/README.md",
+		"changelogUrl": "https://raw.githubusercontent.com/fortytwostudio/colour-palettes/main/CHANGELOG.md",
+		"class": "fortytwostudio\\colourpalettes\\ColourPalettes"
+	},
+	"config": {
+		"allow-plugins": {
+			"yiisoft/yii2-composer": true,
+			"craftcms/plugin-installer": true
+		}
+	}
+}
