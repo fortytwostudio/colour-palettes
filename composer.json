@@ -2,7 +2,7 @@
 	"name": "fortytwo-studio/colour-palettes",
 	"description": "Colour palettes with solid colours, gradients and custom attributes.",
 	"type": "craft-plugin",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"license": "MIT",
 	"authors": [
 		{

@@ -1,7 +1,7 @@
 {% if options | length %}
     <div class="colour-palettes">
         {% for option in options %}
-            <label class="colour-palettes__option">
+            <label class="colour-palettes__option" title="{{ option.label }}">
                 <input
 					class="colour-palettes__input"
 					type="radio"
@@ -11,11 +11,12 @@
 					{% if value == option.class %}checked{% endif %}
 				>
 
-                <span
-                    class="colour-palettes__swatch"
-                    aria-hidden="true"
-                    style="background: {{ option.color }};"
-                ></span>
+                <span class="colour-palettes__swatch" aria-hidden="true">
+					<span
+						class="colour-palettes__colour"
+						style="background: {{ option.color }};"
+					></span>
+				</span>
 
                 <span class="colour-palettes__label">
                     {{ option.label }}
@@ -62,10 +63,26 @@
     width: 35px;
     height: 35px;
     border-radius: 8px;
-    border: 1px solid rgba(127, 127, 127, 0.4);
+    border: 1px solid #ccc;
     outline: 2px solid transparent;
     outline-offset: 1px;
     transition: outline-color 150ms ease;
+	position: relative;
+	background-color: #fff;
+	overflow: hidden;
+	background-image: conic-gradient(
+		#ddd 25%,
+		transparent 0 50%,
+		#ddd 0 75%,
+		transparent 0
+	);
+	background-size: 10px 10px;
+}
+
+.colour-palettes__colour {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
 }
 
 .colour-palettes__label {
